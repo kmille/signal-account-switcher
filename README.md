@@ -43,7 +43,7 @@ kmille@linbox:signal-account-switcher file /home/kmille/projects/signal-account-
 /home/kmille/projects/signal-account-switcher/fyne-cross/bin/windows-amd64/signal-account-switcher: PE32+ executable (GUI) x86-64 (stripped to external PDB), for MS Windows, 12 sectionsbash
 ```
 
-Build it for Mac:
+Build it for Mac:  
 TODO: needs the "Command Line Tools for Xcode". I can't get them... Check the [docs](https://github.com/fyne-io/fyne-cross#build-the-docker-image-for-osxdarwinapple-cross-compiling).
 
 #    Cleanup
