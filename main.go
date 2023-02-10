@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"image/color"
 	"os"
@@ -16,19 +17,23 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func get_signal_executable() string {
+func get_signal_executable() (error, string) {
 	switch runtime.GOOS {
 	case "linux":
-		return "signal-desktop"
+		return nil, "signal-desktop"
 	case "darwin":
-		return "Signal"
+		return nil, "/Applications/Signal.app/Contents/MacOS/Signal"
 	case "windows":
-		return "Signal.exe"
+		dir, err := os.UserCacheDir()
+		if err != nil {
+			return err, ""
+		}
+		return nil, filepath.Join(dir, "Programs", "signal-desktop", "Signal.exe")
 	default:
 		fmt.Println("OS is not supported")
 		os.Exit(1)
 	}
-	return ""
+	return errors.New("This is will never be reached"), ""
 
 }
 
@@ -46,27 +51,38 @@ func get_data_dir(account_id int) (error, string) {
 	return nil, data_dir
 }
 
+func change_text(debug *canvas.Text, text string) {
+	debug.Text = text
+	debug.Refresh()
+}
+
 func run_signal(account_id int, debug *canvas.Text) {
-	signal_bin := get_signal_executable()
+	err, signal_bin := get_signal_executable()
+	if err != nil {
+		change_text(debug, fmt.Sprintf("Error getting signal binary: %s", err))
+		return
+	}
 	err, data_dir := get_data_dir(account_id)
 	if err != nil {
-		debug.Text = fmt.Sprintf("Error creating data_dir: %s", err)
+		change_text(debug, fmt.Sprintf("Error creating data_dir: %s", err))
 		return
 	}
 	cmd := exec.Command(signal_bin, "--user-data-dir="+data_dir)
-	debug.Text = fmt.Sprintf("Staring Signal Account %d with data_dir %q", account_id, data_dir)
+	change_text(debug, fmt.Sprintf("Starting Signal Account %d with data_dir %q. Plase wait... ", account_id, data_dir))
 	err = cmd.Run()
 	if err != nil {
-		debug.Text = fmt.Sprint("Error executing Signal: %s\n", err)
+		change_text(debug, fmt.Sprint("Error executing Signal: %s\n", err))
 	}
 }
 
 func main() {
 	a := app.New()
 	w := a.NewWindow("Signal account switcher")
-	w.Resize(fyne.NewSize(200, 400))
+	w.Resize(fyne.NewSize(400, 500))
+	w.RequestFocus()
 
-	debug := canvas.NewText("Hi, please choose account", color.White)
+	//debug := canvas.NewText("Hi, please choose account", color.Black)
+	debug := canvas.NewText("Hi, please choose account", color.RGBA{R: 0x32, G: 0xCD, B: 0x32, A: 100})
 	account1 := widget.NewButton("Account #1", func() {
 		run_signal(1, debug)
 	})
