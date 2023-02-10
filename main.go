@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -14,6 +15,22 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 )
+
+func get_signal_executable() string {
+	switch runtime.GOOS {
+	case "linux":
+		return "signal-desktop"
+	case "darwin":
+		return "Signal"
+	case "windows":
+		return "Signal.exe"
+	default:
+		fmt.Println("OS is not supported")
+		os.Exit(1)
+	}
+	return ""
+
+}
 
 func get_data_dir(account_id int) (error, string) {
 	config_dir, err := os.UserConfigDir()
@@ -30,12 +47,13 @@ func get_data_dir(account_id int) (error, string) {
 }
 
 func run_signal(account_id int, debug *canvas.Text) {
+	signal_bin := get_signal_executable()
 	err, data_dir := get_data_dir(account_id)
 	if err != nil {
 		debug.Text = fmt.Sprintf("Error creating data_dir: %s", err)
 		return
 	}
-	cmd := exec.Command("signal-desktop", "--user-data-dir="+data_dir)
+	cmd := exec.Command(signal_bin, "--user-data-dir="+data_dir)
 	debug.Text = fmt.Sprintf("Staring Signal Account %d with data_dir %q", account_id, data_dir)
 	err = cmd.Run()
 	if err != nil {
