@@ -3,7 +3,7 @@ A simple tool that allows you to run multiple instances of signal-desktop (four 
 1) a `data_dir` is created in `$working_dir/Signal-Account-1`
 2) `signal-desktop` is executed with the parameter `--user-data-dir=$working_dir/Signal-Account-1`
 
-Depending on your OS, $working_dir is `~/.config`, `$HOME/Library/Application` or `%AppData%`. If you want to remove all data from an account, just delete the directory in $working_dir.
+Depending on your OS, $working_dir is `~/.config`, `$HOME/Library/Application` or `%AppData%`. If you want to remove all data from an account, just delete the directory in $working_dir. There is also an [AUR package](https://aur.archlinux.org/packages/signal-account-switcher) for Arch Linux.
 
 # Screenshot
 
