@@ -1,5 +1,5 @@
 # signal-account-switcher
-A simple tool that allows you to run multiple instances of signal-desktop (four additional accounts) on you Laptop. There are ready-to-use binaries for all major platforms (Linux, Mac, Windows). Start the `signal-account-switcher`. When you click on 'Start signal account #1'
+A simple tool that allows you to run multiple instances of signal-desktop (four additional accounts) on your Laptop. There are ready-to-use binaries for all major platforms (Linux, Mac, Windows). Start the `signal-account-switcher`. When you click on 'Start signal account #1'
 1) a `data_dir` is created in `$working_dir/Signal-Account-1`
 2) `signal-desktop` is executed with the parameter `--user-data-dir=$working_dir/Signal-Account-1`
 
