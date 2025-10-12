@@ -8,7 +8,7 @@ Then, please follow this tutorial on YouTube: https://www.youtube.com/watch?v=Te
 [![Youtube Tutorial ](https://img.youtube.com/vi/TejhH80jktE/0.jpg)](https://www.youtube.com/watch?v=TejhH80jktE)
 
 # How can I use signal-account-switcher?
-1) First, download `signal-acccount-swichter` from the [release page](https://github.com/kmille/signal-account-switcher/releases). You can also use these direct download links:
+1. First, download `signal-acccount-swichter` from the [release page](https://github.com/kmille/signal-account-switcher/releases). You can also use these direct download links:
 - [Download for Windows](https://github.com/kmille/signal-account-switcher/releases/download/v0.1.0/signal-account-switcher.exe)
 - [Download for Linux](https://github.com/kmille/signal-account-switcher/releases/download/v0.1.0/signal-account-switcher). If you're using Arch Linux, you can use the [AUR package](https://aur.archlinux.org/packages/signal-account-switcher).
 - [Download for Mac (ARM)](https://github.com/kmille/signal-account-switcher/releases/download/v0.1.0/signal-account-switcher-mac-arm)
@@ -37,7 +37,7 @@ Depending on your operating system, $working_dir is `~/.config` (Linux), `$HOME/
 
 # How can I delete/backup/migrate a Signal account?
 
-Please read the "How does it work?" section to find Signal's data directory. If you want to remove all data from a Signal account, just delete the directory in the working directory. If you want to backup the Signal account or move it to a different computer, you just have to copy/move the data directory to a backup disk or a different computer.
+Please read the "How does it work?" section to find Signal's data directory. If you want to remove all data from a Signal account, just delete the directory in the working directory. If you want to back up the Signal account or move it to a different computer, you just have to copy/move the data directory to a backup disk or a different computer.
 
 # How does it look like?
 
@@ -51,6 +51,8 @@ strip signal-account-switcher
 file signal-account-switcher
 signal-account-switcher: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=c60867bc53ad2ff8f56622bf24c85842f2cec213, for GNU/Linux 4.4.0, stripped
 ```
+
+## Cross-compile for Windows and Mac
 
 To cross-compile it for Windows and Mac, use `fyne-cross` (needs Docker)
 
@@ -77,11 +79,12 @@ kmille@linbox:signal-account-switcher file /home/kmille/projects/signal-account-
 kmille@linbox:signal-account-switcher
 ```
 Cross-compilation for Mac:  
-Hmpf, the [docs](https://github.com/fyne-io/fyne-cross#build-the-docker-image-for-osxdarwinapple-cross-compiling) say you need the "Command Line Tools for Xcode". I can't get them without an account...
+Hmpf, the [docs](https://github.com/fyne-io/fyne-cross#build-the-docker-image-for-osxdarwinapple-cross-compiling) say
+you need the "Command Line Tools for Xcode". I can't get them without an account...
 
-# Build Cleanup
+### Build Cleanup
+
 ```bash
 sudo docker rmi fyneio/fyne-cross:1.3-windows
 sudo docker rmi fyneio/fyne-cross:1.3-base-llvm
 ```
-
