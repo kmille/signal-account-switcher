@@ -25,6 +25,14 @@ Then, please follow this tutorial on YouTube: https://www.youtube.com/watch?v=Te
 
 - If you're on Linux, go into your Downloads directory, right click `signal-account-switcher`, go to "Properties", then "Permissions" and enable the "Allow run this file as a program" checkbox. Then double click `signal-account-switcher` in your file explorer to start it.
 
+- If you're using MacOS, you need to make the downloaded file executable.
+
+  - 1) Open terminal Terminal
+  - 2) Switch to Download directory: `cd Downloads`
+  - 3) Enter this command (and confirm with Enter): `chmod +x signal-account*`
+  - 4. Double click the file in Finder
+
+
 # How does it work?
 
 In signal-desktop, you cannot just add a new signal account. But you can start the signal-desktop application with a command line parameter to specify a different data directory. This is what `signal-account-switcher` is doing:
